@@ -14,7 +14,8 @@ public class PlayerMove : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    Vector2 movement;
+    private string facingDirection;
+    private string previousFacing = "right";
 
     // Update is called once per frame
     void Update()
@@ -23,10 +24,14 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && xSpeed > minxSpeed)
         {
             xSpeed -= blastSpeed;
+            facingDirection = "right";
+            Flip();
         }
         if (Input.GetKeyDown(KeyCode.A) && xSpeed < maxxSpeed)
         {
             xSpeed += blastSpeed;
+            facingDirection = "left";
+            Flip();
         }
         if (Input.GetKeyDown(KeyCode.W) && xSpeed > minxSpeed)
         {
@@ -44,4 +49,22 @@ public class PlayerMove : MonoBehaviour
         // Handling movement (In Fixed to avoid bugs)
         rb.velocity = new Vector2(xSpeed, ySpeed);
     }
+
+    private void Flip()
+    {
+        if ((facingDirection == "left" && previousFacing == "right") || (facingDirection == "right" && previousFacing == "left"))
+        {
+            transform.Rotate(0, 180f, 0);
+            if(previousFacing == "left")
+            {
+                previousFacing = "right";
+            }
+            else if (previousFacing == "right")
+            {
+                previousFacing = "left";
+            }
+        }
+    }
+
+
 }
