@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,13 +11,16 @@ public class PlayerMove : MonoBehaviour
 
     public float xSpeed = 0f;
     public float ySpeed = 0f;
-    public float minxSpeed = -6f;
-    public float maxxSpeed = 6f;
+    public float minxSpeed = -6f, minySpeed = -6f;
+    public float maxxSpeed = 6f, maxySpeed = 6f;
 
     public Rigidbody2D rb;
-
-    private string facingDirection;
-    private string previousFacing = "right";
+    public Quaternion upRot;
+    public Quaternion downRot;
+    public Quaternion leftRot;
+    public Quaternion rightRot;
+    private bool cooldown;
+    private string facingDirection = "right";
 
     // Update is called once per frame
     void Update()
@@ -33,14 +38,20 @@ public class PlayerMove : MonoBehaviour
             facingDirection = "left";
             Flip();
         }
-        if (Input.GetKeyDown(KeyCode.W) && xSpeed > minxSpeed)
+        if (Input.GetKeyDown(KeyCode.W) && ySpeed > minySpeed)
         {
             ySpeed -= blastSpeed;
+            facingDirection = "up";
+            Flip();
         }
-        if (Input.GetKeyDown(KeyCode.S) && xSpeed < maxxSpeed)
+        if (Input.GetKeyDown(KeyCode.S) && ySpeed < maxySpeed)
         {
             ySpeed += blastSpeed;
+            facingDirection = "down";
+            Flip();
         }
+        xSpeed = xSpeed / 1.005f;
+        ySpeed = ySpeed / 1.005f;
 
     }
 
@@ -52,19 +63,62 @@ public class PlayerMove : MonoBehaviour
 
     private void Flip()
     {
-        if ((facingDirection == "left" && previousFacing == "right") || (facingDirection == "right" && previousFacing == "left"))
+        if(!cooldown) 
         {
-            transform.Rotate(0, 180f, 0);
-            if(previousFacing == "left")
+            if (facingDirection == "left")
             {
-                previousFacing = "right";
+                //Debug.Log("left triggered");
+                leftRot.eulerAngles = new Vector3(0, 180, 0);
+                StartCoroutine(Rotate(0, leftRot, 1000));
             }
-            else if (previousFacing == "right")
+            else if (facingDirection == "right")
             {
-                previousFacing = "left";
+                //Debug.Log("right triggered");
+                rightRot.eulerAngles = new Vector3(0, 0, 0);
+                StartCoroutine(Rotate(0, rightRot, 1000));
+            }
+
+            else if (facingDirection == "up")
+            {
+                upRot.eulerAngles = new Vector3(0, 0, 90);
+
+                StartCoroutine(Rotate(0, upRot, 1000));
+
+
+            }
+            else if (facingDirection == "down")
+            {
+                downRot.eulerAngles = new Vector3(0, 0, -90);
+
+                StartCoroutine(Rotate(0, downRot, 1000));
             }
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            return;
+        }
+        else
+        {
+            xSpeed = 0;
+            ySpeed = 0;
+        }
+    }
+
+    IEnumerator Rotate(float seconds, Quaternion dir, int speed)
+    {
+        cooldown = true;
+        var step = speed;
+
+        while (transform.rotation != dir)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, dir, step);
+            yield return new WaitForSeconds(seconds);
+        }
+        cooldown = false;
+    }
 
 }

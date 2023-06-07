@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -13,8 +14,17 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
+    
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log(hitInfo.name);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }
