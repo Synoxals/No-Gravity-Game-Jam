@@ -59,8 +59,7 @@ public class PlayerMove : MonoBehaviour
             facingDirection = "down";
             Flip();
         }
-        xSpeed = xSpeed / 1.005f;
-        ySpeed = ySpeed / 1.005f;
+        
         if (Health<= 0 && !isDead)
         {
             isDead = true;
@@ -73,6 +72,8 @@ public class PlayerMove : MonoBehaviour
     {
         // Handling movement (In Fixed to avoid bugs)
         rb.velocity = new Vector2(xSpeed, ySpeed);
+        xSpeed = xSpeed / 1.01f;
+        ySpeed = ySpeed / 1.01f;
     }
     void Die()
     {
@@ -143,5 +144,11 @@ public class PlayerMove : MonoBehaviour
         }
         cooldown = false;
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("FireBall"))
+        {
+            anim.SetTrigger("Dead");
+        }
+    }
 }

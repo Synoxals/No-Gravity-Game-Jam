@@ -31,7 +31,7 @@ public class PlayerFire : MonoBehaviour
         {
             anim.SetBool("Shooting", false);
         }
-        shootTimer = shootTimer - 0.01f;
+        shootTimer = shootTimer - 0.005f;
     }
 
     private IEnumerator Shoot()

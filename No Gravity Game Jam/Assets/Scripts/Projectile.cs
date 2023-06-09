@@ -6,9 +6,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed;
-    public Animator PlayerAnim;
+    
     private Vector2 dir;
-    private bool charge;
+    private bool charge = true;
     public string targetTag;
 
     private void Awake()
@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     {
         if (!charge)
         {
+            
             transform.Translate(dir * speed * Time.deltaTime);
         }
         
@@ -32,15 +33,25 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag== targetTag)
+        if (collision.tag == targetTag)
         {
-            PlayerAnim.SetBool("Dead", true);
+
+            Destroy(gameObject);
         }
-        Destroy(this.gameObject);
-    }
+        if (collision.tag == "enemy" || collision.tag == "Background")
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("touched " +collision.name);
+            Destroy(gameObject);
+        }
+
+    }    
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         charge= false;
     }
 }

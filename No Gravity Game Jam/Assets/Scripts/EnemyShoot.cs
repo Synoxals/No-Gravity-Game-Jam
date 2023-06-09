@@ -8,24 +8,24 @@ public class EnemyShoot : MonoBehaviour
     
     public GameObject FireBall;
     public Transform Mouth;
-    private bool CoolDown;
+    private bool CoolDown = true;
 
     void Awake()
     {
-        CoolDown= false;
+        Invoke("Enter", 4);
     }
     private void Update()
     {
         
         if (!CoolDown)
         {
+            CoolDown = true;
             StartCoroutine(ShootCoolDown());
         }
     }
     IEnumerator ShootCoolDown()
     {
         Shoot();
-        CoolDown= true;
         yield return new WaitForSeconds(5);
         CoolDown= false;
 
@@ -33,11 +33,16 @@ public class EnemyShoot : MonoBehaviour
 
     public void Shoot()
     {
+        Debug.Log("Shoot triggered");
         anim.SetTrigger("Shoot");
         GameObject go = Instantiate(FireBall, Mouth.position, Quaternion.identity);
 
         Vector3 dir = new Vector3(transform.localScale.x, 0);
 
         go.GetComponent<Projectile>().Setup(dir);
+    }
+    private void Enter()
+    {
+        CoolDown = false;
     }
 }
