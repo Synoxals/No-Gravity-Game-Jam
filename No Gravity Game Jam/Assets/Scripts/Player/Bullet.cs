@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb;
+    PlayerFire playerFire;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,8 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Enemy hit");
             Destroy(other.gameObject);
+            playerFire.Kills++;
+            Destroy(this);
         }
         if (other.gameObject.CompareTag("Player"))
         {

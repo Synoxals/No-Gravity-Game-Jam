@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     public float Timeer;
     CircleCollider2D circleCollider;
     Animator anim;
-    public GameObject player;
+    private GameObject player;
     private bool rotating = false;
     public float rospeed;
 
@@ -31,7 +31,8 @@ public class EnemyMove : MonoBehaviour
     }
     private void Awake()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(transform.position.z);
         if (transform.position.y > 0)
         {
             transform.Rotate(0, 0, 180);
@@ -44,21 +45,14 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            TakeDamage(1);
-            Debug.Log(gameObject.name);
-        }*/
-
+       
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            anim.SetTrigger("Dead");
+            Invoke("destroy", 2);
         }
     }
-    void TakeDamage(int damage)
-    {
-        currentHealth--;
-    }
+   
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
@@ -72,23 +66,20 @@ public class EnemyMove : MonoBehaviour
         {
             circleCollider.isTrigger = true;
         }
+        else if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy"))
+        {
+            Destroy(collision.gameObject);
+            currentHealth--;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("enemy"))
+        currentHealth--;
+        if (collision.gameObject.name == "Shooting Enemy(Clone)")
         {
-            if (gameObject.transform.position.x < collision.transform.position.x)
-            {
-                anim.SetTrigger("pushed");
-                Debug.Log("hi");
-                rb.velocity = transform.right * -speed * 4;
-            }
-
-            else
-            {
-                return;
-            }
+            Destroy(collision.gameObject);
         }
     }
     private IEnumerator Countdown()
@@ -101,9 +92,13 @@ public class EnemyMove : MonoBehaviour
     IEnumerator LookAtPlayer()
     {
         rotating= true;
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(2);
         rotating= false;
         rb.velocity = transform.up * 4;
     }
 
+    private void destroy()
+    {
+        Destroy(gameObject);
+    }
 }

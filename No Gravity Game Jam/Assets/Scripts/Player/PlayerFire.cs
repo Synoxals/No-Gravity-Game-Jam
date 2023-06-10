@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerFire : MonoBehaviour
     Animator anim;
     public float timerMax;
     public float shootTimer;
+    public int Kills = 0;
 
     private void Start()
     {
@@ -32,6 +34,10 @@ public class PlayerFire : MonoBehaviour
             anim.SetBool("Shooting", false);
         }
         shootTimer = shootTimer - 0.005f;
+        if (Kills >= 30) 
+        {
+            SceneManager.LoadScene("Win");
+        }
     }
 
     private IEnumerator Shoot()

@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &207999005 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
-  m_PrefabInstance: {fileID: 5014733215090422180}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &385005575
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +278,6 @@ Transform:
   - {fileID: 1008511593}
   - {fileID: 1107369978}
   - {fileID: 385005576}
-  - {fileID: 207999005}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,11 +330,13 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -14.288432, y: 6.931931}
+  - {x: -12.196212, y: 6.934934}
   - {x: 14.208681, y: 6.989244}
   - {x: 14.199303, y: -6.998979}
   - {x: -14.234705, y: -7.0077443}
   - {x: -14.177602, y: 5.765473}
-  - {x: -14.171897, y: 7.068368}
+  - {x: -14.206925, y: 6.4568133}
+  - {x: -14.171897, y: 6.8477015}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -440,7 +436,6 @@ GameObject:
   - component: {fileID: 1107369978}
   - component: {fileID: 1107369979}
   - component: {fileID: 1107369980}
-  - component: {fileID: 1107369981}
   m_Layer: 0
   m_Name: EnemyTrigger
   m_TagString: Wall
@@ -479,7 +474,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 13.690738, y: 6.9940925}
+  - {x: 13.592343, y: 7.1313486}
+  - {x: 13.608768, y: 6.4166155}
   - {x: 13.583906, y: -7.00963}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -503,28 +499,6 @@ EdgeCollider2D:
   m_Points:
   - {x: -13.696034, y: -7.0106006}
   - {x: -13.77347, y: 6.9786344}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!68 &1107369981
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107369977}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 11.871819, y: -6.9691396}
-  - {x: 11.944733, y: 6.7133894}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -609,7 +583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289712787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.892249, y: 0.54000425, z: -8.828537}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -797,7 +771,7 @@ MonoBehaviour:
   rangerPrefab: {fileID: 6326111902983104767, guid: 32e7bc2c762659d47a24c0107a6fdc9d, type: 3}
   meleePrefab: {fileID: 4352406138044253228, guid: 5fd7df39bf29e9e4793efa5f34301c71, type: 3}
   rangerInterval: 15
-  meleeInterval: 2
+  meleeInterval: 4
   Enemies: {fileID: 1289712788}
 --- !u!4 &1944513821
 Transform:
@@ -820,15 +794,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 2
-    m_TransformParent: {fileID: 519420032}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.00008767843
+      value: 0.5000877
       objectReference: {fileID: 0}
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_LocalPosition.y
@@ -836,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_LocalRotation.w

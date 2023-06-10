@@ -123,9 +123,8 @@ MonoBehaviour:
   rb: {fileID: 4352406138044253270}
   speed: 2
   maxHealth: 1
-  currentHealth: 0
+  currentHealth: 1
   Timeer: 1
-  player: {fileID: 5014733215021457855, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
   rospeed: 20
   rotationModifier: 90
 --- !u!50 &4352406138044253270
