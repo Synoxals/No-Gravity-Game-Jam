@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rb: {fileID: 8458150414215040075}
+  playerFire: {fileID: 5014733215021457797, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
 --- !u!95 &1086989305167358220
 Animator:
   serializedVersion: 4

@@ -94,7 +94,7 @@ public class EnemyMove : MonoBehaviour
         rotating= true;
         yield return new WaitForSeconds(2);
         rotating= false;
-        rb.velocity = transform.up * 4;
+        rb.velocity = transform.up * 6;
     }
 
     private void destroy()

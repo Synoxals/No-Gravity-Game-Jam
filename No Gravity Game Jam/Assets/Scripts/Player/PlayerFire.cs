@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerFire : MonoBehaviour
     public float timerMax;
     public float shootTimer;
     public int Kills = 0;
+    [SerializeField] TextMeshProUGUI KillCount;
 
     private void Start()
     {
@@ -38,6 +40,11 @@ public class PlayerFire : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
+        KillCount.text = "KILLS: " + Kills;
+    }
+    public void kill()
+    {
+        Kills++;
     }
 
     private IEnumerator Shoot()
