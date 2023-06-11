@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
@@ -149,6 +146,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("FireBall"))
         {
             anim.SetTrigger("Dead");
+            Health--;
         }
     }
 }
