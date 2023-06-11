@@ -125,7 +125,7 @@ public class PlayerMove : MonoBehaviour
             xSpeed = 0;
             ySpeed = 0;
         }
-        if (collision.gameObject.CompareTag("ememyBullet") || collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy"))
         {
             Destroy(collision.gameObject);
             Health--;

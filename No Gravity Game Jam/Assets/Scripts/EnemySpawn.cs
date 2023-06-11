@@ -38,7 +38,6 @@ public class EnemySpawn : MonoBehaviour
         int rand= Random.Range(1,3);
         if (rand == 1) {  y = -8; }
         else if (rand == 2) {  y = 8; }
-        Debug.Log(Enemies);
         yield return new WaitForSeconds(interval);
         Instantiate(enemy, new Vector3(Random.Range(-10f, 10),y,0), Quaternion.identity, Enemies);
         StartCoroutine(spawnEnemy2(interval, enemy));

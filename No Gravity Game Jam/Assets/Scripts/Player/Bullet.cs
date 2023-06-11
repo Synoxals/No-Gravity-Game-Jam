@@ -23,7 +23,8 @@ public class Bullet : MonoBehaviour
             Debug.Log("Enemy hit");
             Destroy(other.gameObject);
             playerFire.Kills++;
-            Destroy(this);
+            Destroy(gameObject);
+            Debug.Log("Bullet destroyed");
         }
         if (other.gameObject.CompareTag("Player"))
         {
