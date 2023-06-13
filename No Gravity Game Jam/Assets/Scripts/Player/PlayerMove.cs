@@ -20,6 +20,8 @@ public class PlayerMove : MonoBehaviour
     public int Health;
     Animator anim;
 
+    public bool god = false;
+
     public bool isDead = false;
     // Update is called once per frame
 
@@ -31,6 +33,11 @@ public class PlayerMove : MonoBehaviour
     {
 
         
+        
+    }
+
+    private void FixedUpdate()
+    {
         // Handling inputs
         if (Input.GetKeyDown(KeyCode.D) && xSpeed > minxSpeed && !isDead)
         {
@@ -56,17 +63,13 @@ public class PlayerMove : MonoBehaviour
             facingDirection = "down";
             Flip();
         }
-        
-        if (Health<= 0 && !isDead)
+
+        if (Health <= 0 && !isDead && !god)
         {
             isDead = true;
             anim.SetTrigger("Dead");
-            Invoke("Die",2);
+            Invoke("Die", 2);
         }
-    }
-
-    private void FixedUpdate()
-    {
         // Handling movement (In Fixed to avoid bugs)
         rb.velocity = new Vector2(xSpeed, ySpeed);
         xSpeed = xSpeed / 1.01f;
@@ -122,7 +125,7 @@ public class PlayerMove : MonoBehaviour
             xSpeed = 0;
             ySpeed = 0;
         }
-        if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy") && !god)
         {
             Destroy(collision.gameObject);
             Health--;
@@ -143,7 +146,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("FireBall"))
+        if (collision.gameObject.CompareTag("FireBall") && !god)
         {
             anim.SetTrigger("Dead");
             Health--;
