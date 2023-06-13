@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07911908, g: 0.081426494, b: 0.10403346, a: 1}
+  m_IndirectSpecularColor: {r: 0.07911994, g: 0.08142593, b: 0.1040316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &8532980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8532981}
+  m_Layer: 0
+  m_Name: ShockwavePoint
+  m_TagString: Bullet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8532981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1335415822}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &279423529
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +823,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1335415822 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
+  m_PrefabInstance: {fileID: 5014733215090422180}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1436163694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1144,14 @@ PrefabInstance:
       propertyPath: KillCount
       value: 
       objectReference: {fileID: 279423531}
+    - target: {fileID: 5014733215021457797, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
+      propertyPath: shockwavePoint
+      value: 
+      objectReference: {fileID: 8532981}
+    - target: {fileID: 5014733215021457797, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
+      propertyPath: shockwavePrefab
+      value: 
+      objectReference: {fileID: 5970805169874379902, guid: 5582f78ce6ae50d44892add4fcace42e, type: 3}
     - target: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1152,10 +1196,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5014733215021457850, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
+      propertyPath: god
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5014733215021457855, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5014733215021457849, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8532981}
   m_SourcePrefab: {fileID: 100100000, guid: b8ff40be6ab299743ae2b64bc4d6ef29, type: 3}
