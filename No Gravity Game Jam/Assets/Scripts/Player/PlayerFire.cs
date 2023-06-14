@@ -22,7 +22,18 @@ public class PlayerFire : MonoBehaviour
     }
     void Update()
     {
+<<<<<<< Updated upstream
         if(!Cooldown)
+=======
+        if (Input.GetKeyDown(KeyCode.V) && !shockwaveCooldown)
+        {
+            startShockwave = true;
+            newShockwave = Instantiate(shockwavePrefab, shockwavePoint.position, shockwavePoint.rotation, shockwavePoint);
+            StartCoroutine(ShockwaveCooldown());
+        }
+
+        if (!Cooldown)
+>>>>>>> Stashed changes
         {
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
@@ -41,6 +52,14 @@ public class PlayerFire : MonoBehaviour
             SceneManager.LoadScene("Win");
         }
         KillCount.text = "KILLS: " + Kills;
+    }
+
+    private void FixedUpdate()
+    {
+        if (startShockwave)
+        {
+            newShockwave.transform.localScale += new Vector3(0.03f, 0.03f, 0.03f);
+        }
     }
     public void kill()
     {
