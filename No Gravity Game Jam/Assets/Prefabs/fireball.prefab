@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   targetTag: Player
+  rb: {fileID: 1525740140489626309}
 --- !u!95 &5893459735865737441
 Animator:
   serializedVersion: 4

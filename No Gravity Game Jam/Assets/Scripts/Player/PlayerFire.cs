@@ -3,37 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerFire : MonoBehaviour
 {
+    [Header("Bullet Stuff")]
     public Transform firePoint;
     public GameObject bulletPrefab;
     private bool Cooldown;
     Animator anim;
     public float timerMax;
     public float shootTimer;
+
+    [Header("Kills Stuff")]
     public int Kills = 0;
     [SerializeField] TextMeshProUGUI KillCount;
+    int previousKills = 0;
+
+    [Header("Shockwave Stuff")]
+    public GameObject shockwavePrefab;
+    public bool shockwaveCooldown = false;
+    public bool startShockwave = false;
+    public Transform shockwavePoint;
+    public float shockwaveTimer = 1.5f;
+    GameObject newShockwave;
+    public int maxCharges = 3;
+    public GameObject chargeBar;
+    Slider chargeSlider;
+
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         shootTimer = timerMax;
+        chargeSlider = chargeBar.GetComponent<Slider>();
+        chargeSlider.maxValue = maxCharges;
     }
     void Update()
     {
-<<<<<<< Updated upstream
-        if(!Cooldown)
-=======
-        if (Input.GetKeyDown(KeyCode.V) && !shockwaveCooldown)
+
+        if (Input.GetKeyDown(KeyCode.V) && !shockwaveCooldown && chargeSlider.value > 0)
         {
             startShockwave = true;
-            newShockwave = Instantiate(shockwavePrefab, shockwavePoint.position, shockwavePoint.rotation, shockwavePoint);
+            newShockwave = Instantiate(shockwavePrefab, shockwavePoint.position, shockwavePoint.rotation,shockwavePoint);
             StartCoroutine(ShockwaveCooldown());
+            chargeSlider.value--;
+        }
+
+        if (Kills == previousKills + 10 && chargeSlider.value < 3)
+        {
+            chargeSlider.value += 1;
+            previousKills += 10;
         }
 
         if (!Cooldown)
->>>>>>> Stashed changes
+
         {
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
@@ -52,13 +76,14 @@ public class PlayerFire : MonoBehaviour
             SceneManager.LoadScene("Win");
         }
         KillCount.text = "KILLS: " + Kills;
+       
     }
 
     private void FixedUpdate()
     {
         if (startShockwave)
         {
-            newShockwave.transform.localScale += new Vector3(0.03f, 0.03f, 0.03f);
+            newShockwave.transform.localScale += new Vector3(0.15f, 0.15f, 0.15f);
         }
     }
     public void kill()
@@ -75,5 +100,15 @@ public class PlayerFire : MonoBehaviour
         
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Cooldown= false;
+    }
+
+    private IEnumerator ShockwaveCooldown()
+    {
+        shockwaveCooldown = true;
+        yield return new WaitForSeconds(0.3f);
+        startShockwave = false;
+        Destroy(newShockwave);
+        yield return new WaitForSeconds(shockwaveTimer);
+        shockwaveCooldown = false;
     }
 }

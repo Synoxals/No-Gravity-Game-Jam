@@ -10,7 +10,9 @@ public class Projectile : MonoBehaviour
     private Vector2 dir;
     private bool charge = true;
     public string targetTag;
+    public bool canKillEnemy = false;
 
+    public Rigidbody2D rb;
     private void Awake()
     {
         StartCoroutine(Wait());
@@ -20,7 +22,7 @@ public class Projectile : MonoBehaviour
         if (!charge)
         {
             
-            transform.Translate(dir * speed * Time.deltaTime);
+            rb.velocity = -transform.right * speed;
         }
         
     }
@@ -35,16 +37,26 @@ public class Projectile : MonoBehaviour
     {
         if (collision.tag == targetTag)
         {
-
             Destroy(gameObject);
         }
-        if (collision.tag == "enemy" || collision.tag == "Background")
+        else if ((collision.tag == "enemy" && !canKillEnemy) || collision.tag == "Background")
         {
             return;
         }
-        else
+        else if (collision.tag == "Shockwave")
+        {
+            charge = true;
+            rb.velocity = -rb.velocity;
+            canKillEnemy = true;
+        }
+        else if (collision.tag == "enemy" && canKillEnemy)
         {
             Debug.Log("touched " +collision.name);
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
         }
 

@@ -14,23 +14,23 @@ public class PlayerMove : MonoBehaviour
     public float maxxSpeed = 6f, maxySpeed = 6f;
 
     public Rigidbody2D rb;
-    public Quaternion upRot, downRot, leftRot, rightRot;  
+    public Quaternion upRot, downRot, leftRot, rightRot;
     private bool cooldown;
     private string facingDirection = "right";
     public int Health;
     Animator anim;
 
+    public bool god = false;
     public bool isDead = false;
     // Update is called once per frame
 
     private void Start()
     {
-        anim= GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
 
-        
         // Handling inputs
         if (Input.GetKeyDown(KeyCode.D) && xSpeed > minxSpeed && !isDead)
         {
@@ -55,17 +55,14 @@ public class PlayerMove : MonoBehaviour
             ySpeed += blastSpeed;
             facingDirection = "down";
             Flip();
+
+
         }
-        
-<<<<<<< Updated upstream
-        if (Health<= 0 && !isDead)
-=======
-        if (Health<= 0 && !isDead && !god)
->>>>>>> Stashed changes
+        if (Health <= 0 && !isDead && !god)
         {
             isDead = true;
             anim.SetTrigger("Dead");
-            Invoke("Die",2);
+            Invoke("Die", 2);
         }
     }
 
@@ -83,7 +80,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Flip()
     {
-        if(!cooldown) 
+        if (!cooldown)
         {
             if (facingDirection == "left")
             {
@@ -126,7 +123,7 @@ public class PlayerMove : MonoBehaviour
             xSpeed = 0;
             ySpeed = 0;
         }
-        if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("FireBall") || collision.gameObject.CompareTag("enemy") && !god)
         {
             Destroy(collision.gameObject);
             Health--;
@@ -147,7 +144,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("FireBall"))
+        if (collision.gameObject.CompareTag("FireBall") && !god)
         {
             anim.SetTrigger("Dead");
             Health--;

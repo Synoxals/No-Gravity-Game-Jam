@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -13,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     CircleCollider2D circleCollider;
     Animator anim;
     private GameObject player;
-    private bool rotating = false;
+    private bool rotating = false, spinspin = false, hasLaunched = false, hasDied = false;
     public float rospeed;
 
     public float rotationModifier;
@@ -48,8 +47,16 @@ public class EnemyMove : MonoBehaviour
        
         if (currentHealth <= 0)
         {
+            hasDied = true;
+            transform.rotation = Quaternion.Euler(0,0,0);
+            rb.velocity = Vector3.zero;
             anim.SetTrigger("Dead");
             Invoke("destroy", 2);
+        }
+
+        if (spinspin && !hasDied)
+        {
+            transform.Rotate(0, 0, 300 * Time.deltaTime);
         }
     }
    
@@ -70,6 +77,11 @@ public class EnemyMove : MonoBehaviour
         {
             Destroy(collision.gameObject);
             currentHealth--;
+        }
+        else if (collision.gameObject.CompareTag("Shockwave") && hasLaunched)
+        {
+            rb.velocity = -rb.velocity;
+            spinspin = true;
         }
 
     }
@@ -95,6 +107,7 @@ public class EnemyMove : MonoBehaviour
         yield return new WaitForSeconds(2);
         rotating= false;
         rb.velocity = transform.up * 6;
+        hasLaunched = true;
     }
 
     private void destroy()
