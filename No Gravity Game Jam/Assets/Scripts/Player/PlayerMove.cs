@@ -57,11 +57,7 @@ public class PlayerMove : MonoBehaviour
             Flip();
         }
         
-<<<<<<< Updated upstream
         if (Health<= 0 && !isDead)
-=======
-        if (Health<= 0 && !isDead && !god)
->>>>>>> Stashed changes
         {
             isDead = true;
             anim.SetTrigger("Dead");
