@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Wall
+  - BGBorder
+  - Background
+  - enemy
+  - FireBall
+  - Shockwave
   layers:
   - Default
   - TransparentFX
@@ -40,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 996707929
+    locked: 0
+  - name: Player
+    uniqueID: 3983401983
     locked: 0
