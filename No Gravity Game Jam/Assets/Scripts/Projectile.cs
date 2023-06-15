@@ -11,11 +11,13 @@ public class Projectile : MonoBehaviour
     private bool charge = true;
     public string targetTag;
     public bool canKillEnemy = false;
+    AudioSource fireballEffect;
 
     public Rigidbody2D rb;
     private void Awake()
     {
         StartCoroutine(Wait());
+        fireballEffect = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -65,5 +67,7 @@ public class Projectile : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         charge= false;
+        fireballEffect.Play();
+
     }
 }

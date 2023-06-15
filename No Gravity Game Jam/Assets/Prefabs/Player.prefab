@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -311565313
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8260fa3e4fbaa204d8ba008dd62c4b27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,6 +153,7 @@ MonoBehaviour:
   leftRot: {x: 0, y: 0, z: 0, w: 0}
   rightRot: {x: 0, y: 0, z: 0, w: 0}
   Health: 1
+  god: 0
   isDead: 0
 --- !u!114 &5014733215021457797
 MonoBehaviour:
@@ -170,6 +171,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 831753108632392067, guid: 027a28f0cee35e3469a89cb3624be976, type: 3}
   timerMax: 3
   shootTimer: 0
+  Kills: 0
+  KillCount: {fileID: 0}
+  shockwavePrefab: {fileID: 0}
+  shockwaveCooldown: 0
+  startShockwave: 0
+  shockwavePoint: {fileID: 0}
+  shockwaveTimer: 1.5
+  maxCharges: 3
+  chargeBar: {fileID: 0}
 --- !u!95 &5014733215021457798
 Animator:
   serializedVersion: 4

@@ -31,6 +31,10 @@ public class PlayerFire : MonoBehaviour
     public GameObject chargeBar;
     Slider chargeSlider;
 
+    [Header("Audio")]
+    public AudioSource blasterSound;
+    public AudioSource shockwaveSound;
+
 
     private void Start()
     {
@@ -45,6 +49,7 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V) && !shockwaveCooldown && chargeSlider.value > 0)
         {
             startShockwave = true;
+            shockwaveSound.Play();
             newShockwave = Instantiate(shockwavePrefab, shockwavePoint.position, shockwavePoint.rotation,shockwavePoint);
             StartCoroutine(ShockwaveCooldown());
             chargeSlider.value--;
@@ -63,6 +68,7 @@ public class PlayerFire : MonoBehaviour
             {
                 
                 StartCoroutine(Shoot());
+                blasterSound.Play();
 
             }
         }
