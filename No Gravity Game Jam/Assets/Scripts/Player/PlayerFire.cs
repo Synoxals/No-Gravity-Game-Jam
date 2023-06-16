@@ -19,6 +19,7 @@ public class PlayerFire : MonoBehaviour
     public int Kills = 0;
     [SerializeField] TextMeshProUGUI KillCount;
     int previousKills = 0;
+    public bool disablewinCondition;
 
     [Header("Shockwave Stuff")]
     public GameObject shockwavePrefab;
@@ -45,6 +46,10 @@ public class PlayerFire : MonoBehaviour
     }
     void Update()
     {
+        //Update Debugs
+        Debug.Log("Previous Kills: " + previousKills);
+        Debug.Log("Current Kills: " + Kills);
+        Debug.Log("Charge Slider Value: " + chargeSlider.value);
 
         if (Input.GetKeyDown(KeyCode.V) && !shockwaveCooldown && chargeSlider.value > 0)
         {
@@ -77,7 +82,9 @@ public class PlayerFire : MonoBehaviour
             anim.SetBool("Shooting", false);
         }
         shootTimer = shootTimer - 0.005f;
-        if (Kills >= 30) 
+
+        
+        if (Kills >= 30 && !disablewinCondition) 
         {
             SceneManager.LoadScene("Win");
         }
