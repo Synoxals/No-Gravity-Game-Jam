@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
         {
             isDead = true;
             anim.SetTrigger("Dead");
-            Invoke("Die", 2);
+            Invoke("Die", 0.6f);
         }
     }
 

@@ -15,12 +15,16 @@ public class EnemyMove : MonoBehaviour
     private bool rotating = false, spinspin = false, hasLaunched = false, hasDied = false;
     public float rospeed;
 
+    public ParticleSystem thruster1;
+    public ParticleSystem thruster2;
+
     public float rotationModifier;
 
     private void FixedUpdate()
     {
         if (rotating)
         {
+            //Faces enemy spaceship towards the player
             Vector3 vectorToTarget = player.transform.position - transform.position;
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - rotationModifier;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -51,6 +55,8 @@ public class EnemyMove : MonoBehaviour
             transform.rotation = Quaternion.Euler(0,0,0);
             rb.velocity = Vector3.zero;
             anim.SetTrigger("Dead");
+            thruster1.Stop();
+            thruster2.Stop();
             Invoke("destroy", 2);
         }
 
@@ -103,11 +109,15 @@ public class EnemyMove : MonoBehaviour
     }
     IEnumerator LookAtPlayer()
     {
+        //Activates if statement in FixedUpdate
         rotating= true;
         yield return new WaitForSeconds(2);
         rotating= false;
         rb.velocity = transform.up * 6;
         hasLaunched = true;
+        //Enable thruster particles
+        thruster1.Play();
+        thruster2.Play();
     }
 
     private void destroy()
