@@ -14,6 +14,7 @@ public class PlayerFire : MonoBehaviour
     Animator anim;
     public float timerMax;
     public float shootTimer;
+    public ParticleSystem FireParticles;
 
     [Header("Kills Stuff")]
     public int Kills = 0;
@@ -74,6 +75,7 @@ public class PlayerFire : MonoBehaviour
                 
                 StartCoroutine(Shoot());
                 blasterSound.Play();
+                FireParticles.Play();
 
             }
         }
