@@ -18,7 +18,7 @@ public class EnemySpawn : MonoBehaviour
         StartCoroutine(spawnEnemy1(rangerInterval, rangerPrefab));
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         rangerInterval = rangerInterval - 0.00001f;
         meleeInterval = meleeInterval + 0.00001f;
